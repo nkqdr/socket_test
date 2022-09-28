@@ -1,20 +1,39 @@
 import React, { useContext, useState } from "react";
-import CustomButton from "./components/CustomButton";
 import { SocketContext } from "./shared/SocketContext";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 
 export default function App() {
-  const [show, setShow] = useState(true);
+  const [name, setName] = useState("");
   const socketContext = useContext(SocketContext);
-  console.log(socketContext.socket);
 
-  const changeVisibility = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setShow(!show);
+  const submitName = () => {
+    socketContext.socket.emit("set_name", { name: name });
+  };
+
+  const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value);
   };
 
   return (
     <div className="App">
-      <input type="checkbox" onChange={changeVisibility} />
-      {show ? <CustomButton /> : <p>No button here</p>}
+      <Stack spacing={2} padding={20}>
+        <Typography variant="h2" align="center">
+          Socket.IO Test
+        </Typography>
+        <TextField
+          id="outlined-basic"
+          value={name}
+          onChange={handleChangeName}
+          label="Name"
+          variant="outlined"
+        />
+        <Button variant="text" onClick={submitName}>
+          Submit
+        </Button>
+      </Stack>
     </div>
   );
 }

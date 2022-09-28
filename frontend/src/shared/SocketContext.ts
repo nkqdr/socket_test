@@ -4,10 +4,10 @@ import { io } from "socket.io-client";
 const socket = io("ws://localhost:8000");
 
 // send a message to the server
-socket.emit("hello from client");
+socket.emit("hello_from_client");
 
 // receive a message from the server
-socket.on("hello from server", () => {
+socket.on("hello_from_server", () => {
   console.log("Received Server response");
 });
 
