@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import React from "react";
 import useSocketContext from "../../hooks/useSocketContext";
-import { Message } from "../ChatWindow/ChatWindow";
+import { Message } from "../../shared/types";
 
 import "./MessageRow.css";
 

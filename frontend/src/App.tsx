@@ -6,14 +6,12 @@ import ChatWindow from "./components/ChatWindow/ChatWindow";
 
 export default function App() {
   return (
-    <div className="App">
-      <Stack spacing={2} padding={20}>
-        <Typography variant="h2" align="center">
-          Socket.IO Chatroom
-        </Typography>
-        <ChatWindow />
-        <MessageForm />
-      </Stack>
-    </div>
+    <Stack spacing={2} padding={20}>
+      <Typography variant="h2" align="center">
+        Socket.IO Chatroom
+      </Typography>
+      <ChatWindow />
+      <MessageForm />
+    </Stack>
   );
 }

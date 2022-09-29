@@ -5,12 +5,7 @@ import Paper from "@mui/material/Paper";
 import "./ChatWindow.css";
 import useSocketContext from "../../hooks/useSocketContext";
 import MessageRow from "../MessageRow/MessageRow";
-
-export interface Message {
-  content: string;
-  senderId?: string;
-  type: "join" | "leave" | "admin" | "message";
-}
+import { Message } from "../../shared/types";
 
 export default function ChatWindow() {
   const [messages, setMessages] = useState<Message[]>([
