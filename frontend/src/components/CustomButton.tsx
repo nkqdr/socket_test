@@ -1,12 +1,12 @@
-import React, { useContext } from "react";
-import { SocketContext } from "../shared/SocketContext";
+import React from "react";
+import useSocketContext from "../hooks/useSocketContext";
 
 export default function CustomButton() {
-  const socketContext = useContext(SocketContext);
+  const socket = useSocketContext();
 
   const clickButton = () => {
     console.log("Test");
-    socketContext.socket.emit("test_button_pressed");
+    socket.emit("test_button_pressed");
   };
 
   return <button onClick={clickButton}>Click me!</button>;

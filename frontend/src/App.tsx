@@ -1,16 +1,16 @@
-import React, { useContext, useState } from "react";
-import { SocketContext } from "./shared/SocketContext";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
+import useSocketContext from "./hooks/useSocketContext";
 
 export default function App() {
   const [name, setName] = useState("");
-  const socketContext = useContext(SocketContext);
+  const socket = useSocketContext();
 
   const submitName = () => {
-    socketContext.socket.emit("set_name", { name: name });
+    socket.emit("set_name", { name: name });
   };
 
   const handleChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
