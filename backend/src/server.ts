@@ -10,24 +10,38 @@ const io = new Server(PORT_NUMBER, {
 });
 
 console.log("Starting...");
-console.log('\x1b[36m', `---> Listening on ${PORT_NUMBER}` ,'\x1b[0m');
+console.log('\x1b[36m');
+console.log(`---> Listening on ${PORT_NUMBER}` ,'\x1b[0m');
 
+var allClients: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>[] = [];
 
 function socketSetup(socket: Socket<DefaultEventsMap, DefaultEventsMap, DefaultEventsMap, any>) {
-  // send a message to the client
-  socket.emit("hello_from_server");
+  allClients.push(socket);
+  socket.emit("new-user-id", {id: socket.id});
+  io.emit("user-join", {name: socket.id});
 
   socket.on("test_button_pressed", () => {
     console.log("User pressed button!");
-  })
+  });
 
   socket.on("set_name", ({name}) => {
     console.log(name);
-  })
+  });
+
+  socket.on("new-message", ({message}) => {
+    console.log("Received: ", message);
+    io.emit("new-message", {message, sender: socket.id});
+  });
 
   // receive a message from the client
   socket.on("hello_from_client", () => {
     console.log("Client connected");
+  });
+
+  socket.on("disconnect", () => {
+    var i = allClients.indexOf(socket);
+    var oldSocket = allClients.splice(i, 1)[0];
+    io.emit("user-leave", {name: oldSocket.id});
   });
 }
 

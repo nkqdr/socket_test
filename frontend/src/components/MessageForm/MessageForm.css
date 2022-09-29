@@ -1,0 +1,9 @@
+
+.message-form-wrapper {
+    width: 100%;
+}
+
+.message-form-stack {
+    position: sticky;
+    bottom: 0;
+}
